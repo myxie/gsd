@@ -7,7 +7,6 @@
 # import standard python things
 import os
 # import gsd-specific things
-from gsd import get_gsd_directory
 
 def make_project(directory, project):
     '''This function makes a standard project and its respective features 
