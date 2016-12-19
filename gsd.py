@@ -8,7 +8,7 @@ import argparse
 
 def get_gsd_directory():
     #TODO Read .json file for configuration information 
-    return '~/Dropbox/GSD/' 
+    return '~/Dropbox/GSD' 
 
 if __name__ == "__main__":
     #Basic argument parsing for command line use
@@ -21,7 +21,8 @@ if __name__ == "__main__":
                     dest = 'project')
     parser.add_argument('-t', '--task', nargs=2, metavar=('TASK', 'PROJECT'),\
                 help='Add a task to a project', dest='task')
-
+    parser.add_argument('-i', '--inspect', nargs=1, metavar=('PROJECT'), \
+                help='Inspect the tasks for a specific project', dest='inspect')
     args = parser.parse_args()
     #'Switching' on the arguments presented to the CLI
     if args.summary:
