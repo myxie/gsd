@@ -7,7 +7,7 @@ import os
 import shutil
 from utils import get_gsd_directory, create_file
 import projects
-
+import tasks
 class TestUtilityMethods(unittest.TestCase):
         
     def test_get_gsd_directory(self):
@@ -24,7 +24,6 @@ class TestUtilityMethods(unittest.TestCase):
             os.makedirs(directory)
         create_file(file_type, directory,project)
         required_directory = '{0}/{1}.gsd'.format(directory, file_type)
-        print required_directory
         self.assertTrue(os.path.exists(required_directory))
 
 class TestProjectMethods(unittest.TestCase):
@@ -40,9 +39,7 @@ class TestProjectMethods(unittest.TestCase):
         
         #create_file('task', project_directory, project_name)
         projects.make_tasks(project_directory,project_name)
-        print project_directory
         required_file = project_directory + '/tasks.gsd'
-        print 'required file is ' + required_file
         self.assertTrue(os.path.exists(required_file))
 
         shutil.rmtree(project_directory)
@@ -65,7 +62,6 @@ class TestProjectMethods(unittest.TestCase):
 
     def test_make_links(self):
         gsd_directory = os.getcwd() #Faking gsd directory as the current directory
-        print gsd_directory
         project_name = 'folder'
         project_directory = '{0}/{1}'.format(gsd_directory, project_name)
         if not os.path.exists(project_directory):
@@ -94,7 +90,6 @@ class TestProjectMethods(unittest.TestCase):
 
     def test_make_project(self):
         gsd_directory = get_gsd_directory()
-        print str(gsd_directory)
         project_name = 'test_project'
         project_directory = '{0}/{1}'.format(gsd_directory, project_name)
         projects.make_project(gsd_directory, project_name)
@@ -106,8 +101,30 @@ class TestProjectMethods(unittest.TestCase):
 
 class TestTaskMethods(unittest.TestCase):
     
-    def test_make_tasts(self):
+    def test_create_task(self):
+        project = 'task_create_project'
+        gsd_directory = get_gsd_directory()
+        projects.make_project(gsd_directory, project)
+        taska = 'Pick up the milk on the way home'
+        tasks.create_task(project, taska)
+        taskb = 'Drink the milk when you get home'
+        tasks.create_task(project, taskb)
         return 0
     
+    def test_archive_task(self):
+        project = 'archive_task_project'
+        gsd_directory = get_gsd_directory()
+        project_directory = '{0}/{1}'.format(gsd_directory, project) 
+        if os.path.exists(project_directory):
+            shutil.rmtree(project_directory)
+        projects.make_project(gsd_directory, project)
+        taska = 'This is an example task 1' 
+        taskb = 'This is an example task 2' 
+        tasks.create_task(project, taska)
+        tasks.create_task(project, taskb)
+        tasks.archive_task(project)
+         
+        return 0
+
 if __name__ == '__main__':
     unittest.main()

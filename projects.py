@@ -19,6 +19,11 @@ def make_project(directory, project):
         os.makedirs(project_directory)
     project_setup(project_directory, project) 
 
+def delete_project(directory, project):
+    project_directory = '{0}/{1}'.format(directory, project)
+    if not os.path.exists(project_directory):
+        print 'Project does not exist'
+
 def project_setup(directory,project):
     '''Function setups the project directory with todo, archive, downloads'''
     make_tasks(directory, project)
