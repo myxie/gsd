@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#/usr/bin/env
 #Getting Shit Done
 #myxie 2016
 
@@ -20,6 +20,7 @@ def archive_task(project):
     project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
     if os.path.exists(project_directory):
         todo_path = '{0}/tasks.gsd'.format(project_directory)
+        archive_path = '{0}/archive.gsd'.format(project_directory)
         if os.path.exists(todo_path):
             tasks = []
             f = open(todo_path)
@@ -33,11 +34,17 @@ def archive_task(project):
                 if(choice >= len(tasks)): #value of choice should always be no. lines - 1
                     print 'Selected task is out of range'
                     choice = None 
-
+        
             task_file = open(todo_path, 'w')
             for index, task in enumerate(tasks):
                 if index != choice:
                     task_file.write(task)
             task_file.close()
+            #TODO Write choice value to archive file 
+
+            archive_file = open(archive_path, 'a') 
+            archive_file.write(choice + '\n')
+            archive_file.close()
+            
 
                     

@@ -32,7 +32,6 @@ class TestProjectMethods(unittest.TestCase):
         gsd_directory = get_gsd_directory() 
         project_name = 'folder'
         project_directory = gsd_directory + '/' + project_name 
-#        project_directory = ('{0}/{1}'.format(gsd_directory, project_name)).rstrip()
         if not os.path.exists(project_directory):
         #Mini setup as make_todo requires the project directory to exist
             os.makedirs(project_directory)

@@ -27,15 +27,15 @@ def task_handler(args):
         print task
         project = args.project[0]
         create_task(project, task) 
+        return 0
     if args.remove:
         if not args.project:
-            print '--project option also required when adding a task'
+            print '--project option also required when removing a task'
             return -1
         project = args.project[0]
-        archive_task(project)  
-
-    return 0
-
+        print project
+        archive_task(project)
+        return 0
 
 if __name__ == "__main__":
     #Basic argument parsing for command line use
@@ -54,12 +54,12 @@ if __name__ == "__main__":
     parser_project.set_defaults(func=project_handler)
 
     parser_task = subparsers.add_parser('task', help='Task help')
-    parser_task.add_argument('--add', nargs='+',type=str, metavar='TASK',\
+    parser_task.add_argument('-a', '--add', nargs='+',type=str, metavar='TASK',\
                 help='Add a task to a project' )
-    parser_task.add_argument('--project', nargs=1, type=str, \
+    parser_task.add_argument('-p', '--project', nargs=1, type=str, \
                 help='Project to which the task is being added') 
-    parser_task.add_argument('remove', default=True,\
-                help='Remove a task')
+    parser_task.add_argument('--remove', action='store_true', \
+                help='Remove a task from a project')
     parser_task.set_defaults(func=task_handler)
 
     args = parser.parse_args()
