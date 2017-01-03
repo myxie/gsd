@@ -29,7 +29,7 @@ def archive_task(project):
             for index, task in enumerate(tasks[1:], start=1): #ignore the first line; it is a comment
                 print '[{0}] '.format(index) + task
             while(choice is None): 
-                user_input= input("Select numbered task you want deleted\n")
+                user_input= raw_input("Select numbered task you want deleted\n")
                 choice = user_input  #  
                 if(choice >= len(tasks)): #value of choice should always be no. lines - 1
                     print 'Selected task is out of range'
@@ -40,7 +40,7 @@ def archive_task(project):
                 if index != choice:
                     task_file.write(task)
             task_file.close()
-            #TODO Write choice value to archive file 
+            #TODO Write tests to take into account user input 
 
             archive_file = open(archive_path, 'a') 
             archive_file.write(choice + '\n')
