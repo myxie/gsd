@@ -22,7 +22,14 @@ def make_project(directory, project):
 def delete_project(directory, project):
     project_directory = '{0}/{1}'.format(directory, project)
     if not os.path.exists(project_directory):
-        print 'Project does not exist'
+        print '[gsd] Project does not exist'
+        return 0
+    else: 
+        user_response = raw_input('[gsd] Are you sure you want to delete ' \
+                    + project + 'at ' + project_directory '? (y/n)\n')
+        if user_response == 'y':
+            shutil.rmtree(project_directory)
+
 
 def project_setup(directory,project):
     '''Function setups the project directory with todo, archive, downloads'''

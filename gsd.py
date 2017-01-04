@@ -11,30 +11,29 @@ from utils import get_gsd_directory
 
 def project_handler(args):
     #Handles the subparsing from the commandline
-    print 'In project Handler'
     if args.project == 'add':
-        new_project = raw_input("Enter the name of a new project")
+        new_project = raw_input("[gsd] Enter the name of a new project:\n")
         directory = get_gsd_directory()
         make_project(directory, new_project)
     elif args.list:
         x = 0 
 
 def task_handler(args):
-    if args.add:
-        if not args.project:
-            print '--project option also required when adding a task'
-            return -1
-        task = ' '.join(args.add) #Creates a string from the task arguments
-        print task
-        project = args.project[0]
-        create_task(project, task) 
+    if args.task == 'add':
+#        if not args.project:
+#            print '--project option also required when adding a task'
+#            return -1
+        new_task = raw_input("[gsd] Enter the task you want added:\n")
+        project = raw_input("[gsd] Enter the project the task belongs too:\n")
+        print new_task, project
+        create_task(project, new_task) 
         return 0
-    if args.remove:
-        if not args.project:
-            print '--project option also required when removing a task'
-            return -1
-        project = args.project[0]
-        print project
+    if args.task == 'remove':
+#        if not args.project:
+#            print '--project option also required when removing a task'
+#            return -1
+        project = raw_input("[gsd] Enter the project from which \
+                you want to remove a task:\n")
         archive_task(project)
         return 0
 
@@ -53,7 +52,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     #TODO Handle logic for tasks, lists, etc (work out a 'switching protocol')
     if args.project:
-        print args        
         project_handler(args) 
-
+    
+    if args.task:
+        task_handler(args)
+    
 
