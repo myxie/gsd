@@ -1,3 +1,3 @@
 Getting Shit Done (gsd)
 
-![gif](http://i.imgur.com/a/jTyUf.gif)
+![gif](http://i.imgur.com/FRXfxE4.gif)
