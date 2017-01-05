@@ -15,6 +15,8 @@ from utils import get_gsd_directory
 def list_handler(args):
     if args.list == 'all':
         available_projects = os.listdir(get_gsd_directory())
+        if len(available_projects) == 0:
+            print '='*80 + '\n' + 'No projects in gsd directory\n' + '='*80
         for project in available_projects:
             print '='*80
             print '[project] ' + project + ':\n'
@@ -37,6 +39,9 @@ def project_handler(args):
         return 0
     if args.project == 'remove':
         available_projects = os.listdir(get_gsd_directory())
+        if len(available_projects) == 0:
+            print 'No projects exist'
+            return 0
         print 'Projects available: ' + str(available_projects) + '\n'
         directory = get_gsd_directory()
         project = raw_input("[gsd] Enter the project you want to remove:\n")
@@ -49,7 +54,6 @@ def task_handler(args):
         print 'Projects available: ' + str(available_projects) + '\n'
         project = raw_input("[gsd] Enter the project the task belongs too:\n")
         new_task = raw_input("[gsd] Enter the task you want added:\n")
-        print new_task, project
         create_task(project, new_task) 
         return 0
     if args.task == 'remove':

@@ -7,8 +7,10 @@ import os
 
 def get_gsd_directory():
     #TOOD Read.json file for configuration information
-    return '/home/croutons/Dropbox/gsd'
-
+    gsd_directory = '/home/croutons/Dropbox/gsd'
+    if not os.path.exists(gsd_directory):
+        os.makedirs(gsd_directory)
+    return gsd_directory 
 def get_project_directory(project):
     return '{0}/{1}'.format(get_gsd_directory(), project) 
 
