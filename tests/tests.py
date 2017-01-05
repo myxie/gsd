@@ -8,10 +8,11 @@ import shutil
 from utils import get_gsd_directory, create_file
 import projects
 import tasks
+
 class TestUtilityMethods(unittest.TestCase):
         
     def test_get_gsd_directory(self):
-        self.assertEqual(get_gsd_directory(), '/home/croutons/Dropbox/GSD')
+        self.assertEqual(get_gsd_directory(), '/home/croutons/Dropbox/gsd')
     
     def test_create_file(self):
         file_type = 'test'
@@ -124,6 +125,20 @@ class TestTaskMethods(unittest.TestCase):
         tasks.archive_task(project)
          
         return 0
+
+    def test_display_tasks(self):
+        project = 'display_task_project'
+        gsd_directory = get_gsd_directory()
+        project_directory = '{0}/{1}'.format(gsd_directory, project)
+        if os.path.exists(project_directory):
+            shutil.rmtree(project_directory)
+        projects.make_project(gsd_directory, project)
+        taska = 'This is a display task for example'
+        taskb = ' Pick up the display milk'
+        tasks.create_task(project, taska)
+        tasks.create_task(project, taskb)
+        tasks.display_tasks(project)
+
 
 if __name__ == '__main__':
     unittest.main()

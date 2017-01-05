@@ -26,7 +26,7 @@ def delete_project(directory, project):
         return 0
     else: 
         user_response = raw_input('[gsd] Are you sure you want to delete ' \
-                    + project + 'at ' + project_directory '? (y/n)\n')
+                    + project + 'at ' + project_directory  + '? (y/n)\n')
         if user_response == 'y':
             shutil.rmtree(project_directory)
 

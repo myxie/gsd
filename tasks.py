@@ -7,7 +7,6 @@ from utils import get_gsd_directory, get_project_directory
 
 def create_task(project, task):
     #Opens the todo.gsd in the project directory
-#    project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
     project_directory = get_project_directory(project)
     if os.path.exists(project_directory):
         todo_path = '{0}/tasks.gsd'.format(project_directory)
@@ -37,6 +36,7 @@ def archive_task(project):
 
             while(choice is None): 
                 user_input= raw_input("[gsd] Select numbered task you want deleted\n")
+                #TODO find a way to cater for multiple options e.g. 1 2 3 7
                 choice = int(user_input)  #raw_input is a string  
                 if(choice >= len(tasks)): #value of choice should always be no. lines - 1
                     print '[gsd] Selected task is out of range'
@@ -56,4 +56,17 @@ def archive_task(project):
             
     else:
         print '[gsd] Project or project path does not exist'
-                    
+
+
+def display_tasks(project):
+    project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
+    if os.path.exists(project_directory):
+        todo_path = '{0}/tasks.gsd'.format(project_directory)
+        if os.path.exists(todo_path):
+            tasks = []
+            f = open(todo_path, 'r')
+            tasks = f.readlines()
+            for task in tasks[1:]:
+                print '[task] ' + task
+    else:
+        print 'Project directory does not exist'
