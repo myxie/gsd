@@ -1,10 +1,13 @@
-#!/usr/bin/env
+#!/usr/bin/env python
 #Getting Shit Done 
 #myxie 2016
 
 import argparse 
 import os
-from projects import make_project
+import sys
+
+# gsd specific imports
+from projects import make_project, delete_project
 from tasks import create_task, archive_task, display_tasks
 from utils import get_gsd_directory
 #Where the main magic happens for running gsd on the command line
@@ -14,7 +17,8 @@ def list_handler(args):
         available_projects = os.listdir(get_gsd_directory())
         for project in available_projects:
             print '='*80
-            print project + ':\n'
+            print '[project] ' + project + ':\n'
+            print '-'*80
             display_tasks(project)
 
     if args.list == 'project':
@@ -23,7 +27,6 @@ def list_handler(args):
         project = raw_input("[gsd] Project: ")
         print '='*80
         display_tasks(project) 
-        x = 0 
     
 def project_handler(args):
     #Handles the subparsing from the commandline
@@ -31,17 +34,28 @@ def project_handler(args):
         new_project = raw_input("[gsd] Enter the name of a new project:\n")
         directory = get_gsd_directory()
         make_project(directory, new_project)
+        return 0
+    if args.project == 'remove':
+        available_projects = os.listdir(get_gsd_directory())
+        print 'Projects available: ' + str(available_projects) + '\n'
+        directory = get_gsd_directory()
+        project = raw_input("[gsd] Enter the project you want to remove:\n")
+        delete_project(directory, project)
+        return 0
 
 def task_handler(args):
     if args.task == 'add':
-        new_task = raw_input("[gsd] Enter the task you want added:\n")
+        available_projects = os.listdir(get_gsd_directory())
+        print 'Projects available: ' + str(available_projects) + '\n'
         project = raw_input("[gsd] Enter the project the task belongs too:\n")
+        new_task = raw_input("[gsd] Enter the task you want added:\n")
         print new_task, project
         create_task(project, new_task) 
         return 0
     if args.task == 'remove':
-        project = raw_input("[gsd] Enter the project from which \
-                you want to remove a task:\n")
+        available_projects = os.listdir(get_gsd_directory())
+        print 'Projects available: ' + str(available_projects) + '\n'
+        project = raw_input("[gsd] Enter the project from which you want to remove a task:\n")
         archive_task(project)
         return 0
 
@@ -49,7 +63,7 @@ if __name__ == "__main__":
     #Basic argument parsing for command line use
     parser = argparse.ArgumentParser(prog='gsd',description= \
                 'Command line client for Getting Shit Done process')
-    parser.add_argument('-l', '--list',  choices=['all', 'project'], \
+    parser.add_argument('-l', '--list',  choices=['all', 'project'], default='all', \
                 help='Display a summary of tasks in all projects')
 
     parser.add_argument('-p','--project', choices=['add', 'remove'], \
@@ -59,13 +73,17 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     #TODO Handle logic for tasks, lists, etc (work out a 'switching protocol')
-    if args.list: 
-        list_handler(args)
-
     if args.project:
-        project_handler(args) 
-    
+        project_handler(args)
+        sys.exit()
+
     if args.task:
         task_handler(args)
-    
+        sys.exit() 
+
+    if args.list: 
+        list_handler(args)
+        sys.exit()
+       
+
 

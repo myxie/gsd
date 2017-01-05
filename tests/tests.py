@@ -99,6 +99,16 @@ class TestProjectMethods(unittest.TestCase):
         shutil.rmtree(project_directory)
         return 0  
 
+    def test_delete_project(self):
+        gsd_directory = get_gsd_directory()
+        project_name = 'delete_project'
+        project_directory = '{0}/{1}'.format(gsd_directory, project_name)
+        projects.make_project(gsd_directory, project_name)
+        self.assertTrue(os.path.exists(project_directory))
+        projects.delete_project(gsd_directory, project_name)
+        self.assertFalse(os.path.exists(project_directory))
+        return 0
+
 class TestTaskMethods(unittest.TestCase):
     
     def test_create_task(self):

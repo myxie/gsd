@@ -6,6 +6,7 @@
 
 # import standard python things
 import os
+import shutil
 # import gsd-specific things
 from utils import create_file
 
@@ -22,11 +23,11 @@ def make_project(directory, project):
 def delete_project(directory, project):
     project_directory = '{0}/{1}'.format(directory, project)
     if not os.path.exists(project_directory):
-        print '[gsd] Project does not exist'
+        print '[gsd] Project does not exist\n'
         return 0
     else: 
         user_response = raw_input('[gsd] Are you sure you want to delete ' \
-                    + project + 'at ' + project_directory  + '? (y/n)\n')
+                    + project + ' at ' + project_directory  + '? (y/n)\n')
         if user_response == 'y':
             shutil.rmtree(project_directory)
 
