@@ -9,7 +9,7 @@ def create_task(project, task):
     #Opens the todo.gsd in the project directory
     project_directory = get_project_directory(project)
     if os.path.exists(project_directory):
-        todo_path = '{0}/tasks.gsd'.format(project_directory)
+        todo_path = '{0}/tasks.txt'.format(project_directory)
         if os.path.exists(todo_path):
             todo_file = open(todo_path, 'a')
             todo_file.write(task+'\n')
@@ -18,8 +18,8 @@ def create_task(project, task):
 def archive_task(project):
     project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
     if os.path.exists(project_directory):
-        todo_path = '{0}/tasks.gsd'.format(project_directory)
-        archive_path = '{0}/archive.gsd'.format(project_directory)
+        todo_path = '{0}/tasks.txt'.format(project_directory)
+        archive_path = '{0}/archive.txt'.format(project_directory)
      
         if os.path.exists(todo_path):
             tasks = []
@@ -61,7 +61,7 @@ def archive_task(project):
 def display_tasks(project):
     project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
     if os.path.exists(project_directory):
-        todo_path = '{0}/tasks.gsd'.format(project_directory)
+        todo_path = '{0}/tasks.txt'.format(project_directory)
         if os.path.exists(todo_path):
             tasks = []
             f = open(todo_path, 'r')

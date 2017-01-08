@@ -16,7 +16,7 @@ def get_project_directory(project):
 
 def create_file(file_type, directory, project):
     if os.path.exists(directory):
-        file_path = '{0}/{1}.gsd'.format(directory, file_type)
+        file_path = '{0}/{1}.txt'.format(directory, file_type)
         if not os.path.exists(file_path):
             output = open(file_path, 'w')
             output.write('#{0} for the {1} project\n'.format(file_type, project))
