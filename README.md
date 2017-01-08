@@ -14,9 +14,9 @@ _gsd_ is a project-based solution to task management that places the emphasis on
 * List tasks assigned to a particular project
 
 Out of the box, a _gsd_ project will contain:
-* A tasks.gsd file, where all tasks are kept
-* An archive.gsd file, where all completed/removed tasks are put,and
-* A links.gsd file, for relevant links relevant to the project
+* A tasks.txt file, where all tasks are kept
+* An archive.txt file, where all completed/removed tasks are put,and
+* A links.txt file, for relevant links relevant to the project
  
 Because of gsd's simplicity and local file management, the user can add any files or folders to their project directory in order to extend what is kept in the project. These could include: 
 * A downloads directory
