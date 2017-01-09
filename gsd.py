@@ -10,6 +10,10 @@ import sys
 from projects import make_project, delete_project
 from tasks import create_task, archive_task, display_tasks
 from utils import get_gsd_directory
+
+#Global definitions
+project_choices = os.listdir(get_gsd_directory())
+
 #Where the main magic happens for running gsd on the command line
 
 def list_handler(args):
@@ -23,10 +27,8 @@ def list_handler(args):
             print '-'*80
             display_tasks(project)
 
-    if args.list == 'project':
-        available_projects = os.listdir(get_gsd_directory())
-        print 'Projects available: ' + str(available_projects) + '\n'
-        project = raw_input("[gsd] Project: ")
+    if args.list in project_choices:
+        project = args.list
         print '='*80
         display_tasks(project) 
     
@@ -67,7 +69,8 @@ if __name__ == "__main__":
     #Basic argument parsing for command line use
     parser = argparse.ArgumentParser(prog='gsd',description= \
                 'Command line client for Getting Shit Done process')
-    parser.add_argument('-l', '--list',  choices=['all', 'project'], default='all', \
+    cl_choices = ['all'] + project_choices
+    parser.add_argument('-l', '--list',  choices=cl_choices, default='all', \
                 help='Display a summary of tasks in all projects')
 
     parser.add_argument('-p','--project', choices=['add', 'remove'], \
