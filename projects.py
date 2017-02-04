@@ -40,7 +40,7 @@ def project_setup(directory,project):
     #make_downloads()
 
 def make_tasks(directory,project):
-    '''Function that creates a todo.gsd file if it doesn't exist
+    '''Function that creates a todo.txt file if it doesn't exist
     @param directory: The project directory
     @param project: The name of the project
     '''
@@ -48,7 +48,7 @@ def make_tasks(directory,project):
     return 0
 
 def make_archive(directory, project):
-    '''Function that opens a archive.gsd file if it doesn't exist
+    '''Function that opens a archive.txt file if it doesn't exist
     @param directory: The project directory
     @param project: The name of the project
     '''
@@ -57,7 +57,7 @@ def make_archive(directory, project):
     return 0
 
 def make_links(directory,project):
-    '''Function that opens a links.gsd file if it doesn't exist
+    '''Function that opens a links.txt file if it doesn't exist
     @param directory: The project directory
     @param project: The name of the project
     '''

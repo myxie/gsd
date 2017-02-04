@@ -24,7 +24,7 @@ class TestUtilityMethods(unittest.TestCase):
         if not os.path.exists(directory):
             os.makedirs(directory)
         create_file(file_type, directory,project)
-        required_directory = '{0}/{1}.gsd'.format(directory, file_type)
+        required_directory = '{0}/{1}.txt'.format(directory, file_type)
         self.assertTrue(os.path.exists(required_directory))
 
 class TestProjectMethods(unittest.TestCase):
@@ -39,7 +39,7 @@ class TestProjectMethods(unittest.TestCase):
         
         #create_file('task', project_directory, project_name)
         projects.make_tasks(project_directory,project_name)
-        required_file = project_directory + '/tasks.gsd'
+        required_file = project_directory + '/tasks.txt'
         self.assertTrue(os.path.exists(required_file))
 
         shutil.rmtree(project_directory)
@@ -53,7 +53,7 @@ class TestProjectMethods(unittest.TestCase):
             os.makedirs(project_directory)
 
         projects.make_archive(project_directory,project_name)
-        self.assertTrue(os.path.exists('{0}/archive.gsd'.format(\
+        self.assertTrue(os.path.exists('{0}/archive.txt'.format(\
                             str(project_directory))))
 
         shutil.rmtree(project_directory)
@@ -69,7 +69,7 @@ class TestProjectMethods(unittest.TestCase):
             os.makedirs(project_directory)
 
         projects.make_links(project_directory,project_name)
-        self.assertTrue(os.path.exists('{0}/links.gsd'.format(\
+        self.assertTrue(os.path.exists('{0}/links.txt'.format(\
                             project_directory)))
 
         shutil.rmtree(project_directory)       
@@ -94,7 +94,7 @@ class TestProjectMethods(unittest.TestCase):
         project_directory = '{0}/{1}'.format(gsd_directory, project_name)
         projects.make_project(gsd_directory, project_name)
         self.assertTrue(os.path.exists(project_directory))
-        self.assertTrue(os.path.exists('{0}/tasks.gsd'.format(project_directory)))
+        self.assertTrue(os.path.exists('{0}/tasks.txt'.format(project_directory)))
 
         shutil.rmtree(project_directory)
         return 0  
