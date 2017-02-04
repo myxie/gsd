@@ -7,7 +7,7 @@ import os
 
 def get_gsd_directory():
     #TOOD Read.json file for configuration information
-    return '/home/croutons/Dropbox/gsd'
+    return '/home/croutons/github/gsd/demonstration_directory'
 
 def get_project_directory(project):
     return '{0}/{1}'.format(get_gsd_directory(), project) 
