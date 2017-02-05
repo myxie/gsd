@@ -9,22 +9,24 @@ from utils import get_gsd_directory, create_file
 import projects
 import tasks
 
+
 class TestUtilityMethods(unittest.TestCase):
-        
+
+    
+    def setUp(self):
+        self.test_directory = 'tests/test_utility'    
+        self.project = 'test_utility'
+        os.makedirs(self.test_directory)#The 'project' directory 
+
+    def tearDown(self):
+        shutil.rmtree(self.test_directory) 
+
     def test_get_gsd_directory(self):
-        self.assertEqual(get_gsd_directory(), '/home/croutons/Dropbox/gsd')
+        self.assertEqual(get_gsd_directory(), 'tests')
     
     def test_create_file(self):
-        file_type = 'test'
-        project = 'create_project_mark_ii'
-        current_directory = os.getcwd()
-#        directory = '/home/croutons/Dropbox/GSD/create_project'
-        gsd_directory = get_gsd_directory()       
-        directory = gsd_directory + '/' + project 
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        create_file(file_type, directory,project)
-        required_directory = '{0}/{1}.txt'.format(directory, file_type)
+        create_file('create_file',self.test_directory, self.project)
+        required_directory = '{0}/{1}.txt'.format(self.test_directory, 'create_file')
         self.assertTrue(os.path.exists(required_directory))
 
 class TestProjectMethods(unittest.TestCase):
@@ -100,13 +102,13 @@ class TestProjectMethods(unittest.TestCase):
         return 0  
 
     def test_delete_project(self):
-        gsd_directory = get_gsd_directory()
-        project_name = 'delete_project'
-        project_directory = '{0}/{1}'.format(gsd_directory, project_name)
-        projects.make_project(gsd_directory, project_name)
-        self.assertTrue(os.path.exists(project_directory))
-        projects.delete_project(gsd_directory, project_name)
-        self.assertFalse(os.path.exists(project_directory))
+        #gsd_directory = get_gsd_directory()
+        #project_name = 'delete_project'
+        #project_directory = '{0}/{1}'.format(gsd_directory, project_name)
+        #projects.make_project(gsd_directory, project_name)
+        #self.assertTrue(os.path.exists(project_directory))
+        #projects.delete_project(gsd_directory, project_name)
+        #self.assertFalse(os.path.exists(project_directory))
         return 0
 
 class TestTaskMethods(unittest.TestCase):

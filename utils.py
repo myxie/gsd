@@ -4,15 +4,16 @@
 
 #Utility functions for gsd project
 import os
-
+import json
 def get_gsd_directory():
-    #TOOD Read.json file for configuration information
-    return '/home/croutons/github/gsd/demonstration_directory'
+    json_str = open(".gsdcfg").read()
+    parsed_config = json.loads(json_str)
+    gsd_directory = parsed_config["gsd_dir"]
 
-    gsd_directory = '/home/croutons/Dropbox/gsd'
     if not os.path.exists(gsd_directory):
         os.makedirs(gsd_directory)
     return gsd_directory 
+
 def get_project_directory(project):
     return '{0}/{1}'.format(get_gsd_directory(), project) 
 
