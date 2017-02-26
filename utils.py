@@ -7,7 +7,6 @@ import os
 
 def get_gsd_directory():
     #TOOD Read.json file for configuration information
-    return '/home/croutons/github/gsd/demonstration_directory'
 
     gsd_directory = '/home/croutons/Dropbox/gsd'
     if not os.path.exists(gsd_directory):

@@ -58,6 +58,20 @@ def archive_task(project):
         print '[gsd] Project or project path does not exist'
 
 
+def check_tasks_exist(project):
+    project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
+    if os.path.exists(project_directory):
+        todo_path = '{0}/tasks.txt'.format(project_directory)
+        if os.path.exists(todo_path):
+            tasks = []
+            f = open(todo_path, 'r')
+            tasks = f.readlines()
+            task_length = len(tasks)
+            if task_length == 1:
+                return -1
+            else: 
+                return 0
+     
 def display_tasks(project):
     project_directory = '{0}/{1}'.format(get_gsd_directory(), project)
     if os.path.exists(project_directory):

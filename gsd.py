@@ -8,7 +8,7 @@ import sys
 
 # gsd specific imports
 from projects import make_project, delete_project
-from tasks import create_task, archive_task, display_tasks
+from tasks import check_tasks_exist, create_task, archive_task, display_tasks
 from utils import get_gsd_directory
 
 #Global definitions
@@ -22,10 +22,10 @@ def list_handler(args):
         if len(available_projects) == 0:
             print '='*80 + '\n' + 'No projects in gsd directory\n' + '='*80
         for project in available_projects:
-            print '='*80
-            print '[project] ' + project + ':\n'
-            print '-'*80
-            display_tasks(project)
+            if(check_tasks_exist(project)) != -1:
+                print '='*80
+                print '[project] ' + project + ':\n'
+                display_tasks(project)
 
     if args.list in project_choices:
         project = args.list
