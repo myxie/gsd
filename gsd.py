@@ -22,6 +22,8 @@ def list_handler(args):
         if len(available_projects) == 0:
             print '='*80 + '\n' + 'No projects in gsd directory\n' + '='*80
         for project in available_projects:
+            if(project == 'gsd'):
+                continue
             if(check_tasks_exist(project)) != -1:
                 print '='*80
                 print '[project] ' + project + ':\n'
